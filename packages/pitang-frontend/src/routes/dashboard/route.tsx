@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useLocation, redirect } from "@tanstack/react-router";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -16,9 +16,28 @@ import {
 } from "@/components/ui/sidebar";
 import { Fragment } from "react/jsx-runtime";
 
+
+
 export const Route = createFileRoute("/dashboard")({
+  beforeLoad: () => {
+    const token = getCookie("@pitang/accessToken");
+    
+    if (!token) {
+      console.log("Acesso negado ao Layout - Redirecionando para Login...");
+      throw redirect({
+        to: "/login",
+      });
+    }
+  },
   component: RouteComponent,
 });
+function getCookie(cookieName: string) {
+  return document.cookie
+    .split("; ")
+    .find((c) => c.startsWith(`${cookieName}=`))
+    ?.split("=")[1];
+}
+
 
 function RouteComponent() {
   const location = useLocation();
@@ -68,3 +87,5 @@ function RouteComponent() {
     </SidebarProvider>
   );
 }
+
+
