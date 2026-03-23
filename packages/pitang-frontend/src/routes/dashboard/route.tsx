@@ -36,14 +36,14 @@ function RouteComponent() {
               orientation="vertical"
               className="mr-2 data-[orientation=vertical]:h-4"
             />
-
+          
             <Breadcrumb>
               <BreadcrumbList>
                 {paths.map((path, index) => {
                   const lastPath = index + 1 === paths.length;
 
                   return (
-                    <Fragment>
+                    <Fragment key={path}>
                       <BreadcrumbItem>
                         <BreadcrumbPage
                           className={`capitalize ${lastPath ? "font-bold" : ""}`}

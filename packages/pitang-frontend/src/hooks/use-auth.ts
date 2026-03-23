@@ -17,24 +17,32 @@ export function useAuth() {
   const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(null);
   const navigate = useNavigate();
 
+  //CONSERTANDO O ERRO DE "Something went wrong" do sign up pra sign in
   useEffect(() => {
+
     async function getAuthenticatedUser() {
-      const response = await fetch("https://dummyjson.com/auth/me", {
+
+      const token = getCookie("@pitang/accessToken");
+
+      if (!token) return;
+
+      try{
+        const response = await fetch("https://dummyjson.com/auth/me", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${getCookie("@pitang/accessToken")}`,
         },
       });
-
+    
       if (!response.ok) {
-        return toast.error("Something went wrong");
-      }
-
-      setLoggedUser(await response.json());
+        throw new Error("Falha ao autenticar");
+      }} catch (error) {
+      console.error("Erro de autenticação:", error);
     }
+  }
 
-    getAuthenticatedUser();
-  }, []);
+  getAuthenticatedUser();
+}, []);
 
   async function handleLogout() {
     document.cookie = "@pitang/accessToken=; path=/; Max-Age=0";
