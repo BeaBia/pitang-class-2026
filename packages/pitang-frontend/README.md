@@ -1,73 +1,25 @@
-# React + TypeScript + Vite
+# 🚀 Pitang Marketplace - Atividade 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido para a trilha de capacitação da Pitang, focado em conceitos avançados de React, roteamento dinâmico e autenticação.
 
-Currently, two official plugins are available:
+## 🎓 Autora
+- **Bia** (Aluna de Engenharia da Computação - UPE)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologias Utilizadas
+- **React 18** com TypeScript
+- **TanStack Router**: Gerenciamento de rotas e proteção de acesso via `beforeLoad`.
+- **Tailwind CSS & Shadcn/UI**: Estilização responsiva e componentes de interface.
+- **Sonner**: Feedback visual via Toasts.
+- **DummyJSON API**: Consumo de endpoints de autenticação e produtos.
 
-## React Compiler
+## 🔐 Funcionalidades Implementadas
+- **Autenticação Segura**: Login utilizando Cookies (`@pitang/accessToken`) para persistência de sessão.
+- **Proteção de Rotas**: Implementação de barreira de segurança no Layout Pai (`/dashboard`), garantindo que sub-rotas como `/products` sejam protegidas automaticamente.
+- **Redirecionamento Inteligente**: Usuários logados são impedidos de acessar a página de Login, sendo enviados diretamente ao Dashboard.
+- **Layout Responsivo**: Página de login adaptável para dispositivos móveis e desktop.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 🚀 Como Executar o Projeto
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Instale as dependências:
+   ```bash
+   npm install
