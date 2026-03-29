@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { type LucideIcon } from "lucide-react"
+import { Link } from "@tanstack/react-router"
 
 import {
   SidebarGroup,
@@ -17,7 +19,7 @@ export function NavSecondary({
   items: {
     title: string
     url: string
-    icon: React.ReactNode
+    icon: LucideIcon
   }[]
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (
@@ -26,9 +28,13 @@ export function NavSecondary({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton size="sm" render={<a href={item.url} />}>
-                {item.icon}
-                <span>{item.title}</span>
+              <SidebarMenuButton 
+                size="sm" 
+                render={<Link to={item.url} />}
+                className="text-[#F9FBDB]/60 hover:text-[#F9FBDB] hover:bg-[#F9FBDB]/10"
+              >
+              <item.icon className="size-4" />
+              <span>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
@@ -37,3 +43,4 @@ export function NavSecondary({
     </SidebarGroup>
   )
 }
+

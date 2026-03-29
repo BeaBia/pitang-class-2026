@@ -5,7 +5,6 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Link } from "@tanstack/react-router";
@@ -75,13 +74,13 @@ export function SignupForm({
     <form className={cn("flex flex-col gap-6", className)} onSubmit={handleSubmit} {...props}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold">Create your account</h1>
+          <h1 className="text-2xl font-bold">Crie sua conta</h1>
           <p className="text-sm text-balance text-muted-foreground">
-            Fill in the form below to create your account
+            Preencha o formulário para cadastrar-se
           </p>
         </div>
         <Field>
-          <FieldLabel htmlFor="name">Full Name</FieldLabel>
+          <FieldLabel htmlFor="name">Nome completo</FieldLabel>
           <Input 
           id="name" 
           type="text" 
@@ -100,12 +99,11 @@ export function SignupForm({
           onChange={(e) => setEmail(e.target.value)}
           required />
           <FieldDescription>
-            We&apos;ll use this to contact you. We will not share your email
-            with anyone else.
+            Nós não usaremos seu email para lhe contactar. E não compartilharemos com ninguém. Se alguém lhe contactar, cuidado! Pode ser um golpe.
           </FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <FieldLabel htmlFor="password">Senha</FieldLabel>
           <Input 
           id="password" 
           type="password" 
@@ -113,23 +111,25 @@ export function SignupForm({
           onChange={(e) => setPassword(e.target.value)}
           required />
           <FieldDescription>
-            Must be at least 8 characters long.
+            Sua senha precisa ter no mín. 8 caracteres
           </FieldDescription>
         </Field>
         <Field>
-          <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
+          <FieldLabel htmlFor="confirm-password">Confirme sua senha</FieldLabel>
           <Input 
           id="confirm-password" 
           type="password" 
           value={confirmPassword} 
           onChange={(e) => setConfirmPassword(e.target.value)}
           required />
-          <FieldDescription>Please confirm your password.</FieldDescription>
+          <FieldDescription>Por favor, confirme sua senha</FieldDescription>
         </Field>
         <Field>
-          <Button type="submit">Create Account</Button>
+          <Button type="submit">Criar uma conta</Button>
         </Field>
-        <FieldSeparator>Or continue with</FieldSeparator>
+          <p className="flex items-center gap-4 text-[#F9FBDB]/40 uppercase tracking-[0.4em] text-[10px] my-2 before:h-px before:flex-1 before:bg-[#F9FBDB]/20 after:h-px after:flex-1 after:bg-[#F9FBDB]/20 text-center w-full">
+          Ou continue com
+          </p>
         <Field>
            <Button variant="outline" type="button" className="w-full">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" className="size-4 mr-2">
@@ -138,10 +138,10 @@ export function SignupForm({
                 fill="currentColor"
               />
             </svg>
-            Sign up with Google
+            Cadastre-se com o Google
           </Button>
           <FieldDescription className="px-6 text-center">
-            Already have an account? <Link to="/login">Sign in</Link>
+            Já tem uma conta? <Link to="/login">Login</Link>
           </FieldDescription>
         </Field>
       </FieldGroup>

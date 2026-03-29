@@ -26,27 +26,36 @@ export function useAuth() {
 
       if (!token) return;
 
-      try{
+      try {
         const response = await fetch("https://dummyjson.com/auth/me", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getCookie("@pitang/accessToken")}`,
-        },
-      });
-    
-      if (!response.ok) {
-        throw new Error("Falha ao autenticar");
-      }} catch (error) {
-      console.error("Erro de autenticação:", error);
-    }
-  }
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${getCookie("@pitang/accessToken")}`,
+          },
+        });
 
-  getAuthenticatedUser();
-}, []);
+        if (!response.ok) {
+          document.cookie = "@pitang/accessToken=; path=/; Max-Age=0";
+          setLoggedUser(null);
+          navigate({ to: "/login" });
+          return;
+        }
+        const data = await response.json();
+        setLoggedUser(data);
+
+      } catch (error) {
+        console.error("Erro de autenticação:", error);
+        setLoggedUser(null);
+      }
+    }
+
+
+    getAuthenticatedUser();
+  }, [navigate]); // Adicionei o navigate aqui por boa prática
 
   async function handleLogout() {
     document.cookie = "@pitang/accessToken=; path=/; Max-Age=0";
-
+    setLoggedUser(null); // Limpa o estado ao sair
     navigate({ to: "/login" });
   }
 
@@ -72,9 +81,13 @@ export function useAuth() {
       return toast.error(json.message);
     }
 
-    toast.success("Welcome...");
+    toast.success("Bem-vindo ao Cais");
 
+    // Salva o cookie
     document.cookie = `@pitang/accessToken=${json.accessToken}; path=/; Max-Age=86400`;
+
+
+    setLoggedUser(json);
 
     navigate({ to: "/dashboard" });
   }

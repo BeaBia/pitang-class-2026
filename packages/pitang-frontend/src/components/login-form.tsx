@@ -29,50 +29,58 @@ export function LoginForm({
   return (
     <form
       {...props}
-      className={cn("flex flex-col gap-6", className)}
+      className={cn("flex flex-col gap-8 bg-transparent p-0 border-none shadow-none w-full", className)}
       onSubmit={(event) => onSubmit(event, { username, password })}
     >
-      <FieldGroup>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold">Login to your account</h1>
-          <p className="text-sm text-balance text-muted-foreground">
-            Enter your username below to login to your account
-          </p>
-        </div>
+      <div className="mb-4 self-start">
+        <h2 className="text-4xl font-black uppercase tracking-tighter text-[#F9FBDB] font-serif">
+          Login
+        </h2>
+        <div className="h-1.5 w-14 bg-[#075F5F] mt-1 shadow-lg" />
+      </div>
+      
+      <FieldGroup className="bg-transparent border-none shadow-none p-0">
         <Field>
-          <FieldLabel htmlFor="username">username</FieldLabel>
           <Input
             id="username"
             name="username"
+            placeholder="Usuário"
             onChange={(event) => setUserName(event.target.value)}
             required
             type="text"
             value={username}
+            className="bg-transparent"
           />
         </Field>
         <Field>
-          <div className="flex items-center">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <a
-              href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
-            >
-              Forgot your password?
-            </a>
-          </div>
           <Input
             id="password"
+            placeholder="Senha"
             onChange={(event) => setPassword(event.target.value)}
             name="password"
             required
             type="password"
             value={password}
+            className="bg-transparent"
           />
+          <div className="flex justify-end mt-2">
+            <a
+              href="#"
+              className="text-xs text-[#F9FBDB]/60 hover:text-[#F9FBDB] transition-colors underline-offset-4 hover:underline"
+            >
+              Esqueceu sua senha?
+            </a>
+          </div>
         </Field>
-        <Field>
-          <Button type="submit">Login</Button>
+        
+        <Field className="mt-2">
+          <Button type="submit" className="w-full">Entrar no Cais</Button>
         </Field>
-        <FieldSeparator>Or continue with</FieldSeparator>
+
+        <p className="flex items-center gap-4 text-[#F9FBDB]/40 uppercase tracking-[0.4em] text-[10px] my-2 before:h-px before:flex-1 before:bg-[#F9FBDB]/20 after:h-px after:flex-1 after:bg-[#F9FBDB]/20 text-center w-full">
+          Ou continue com
+        </p>
+
         <Field>
           <Button variant="outline" type="button" className="w-full">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" className="size-4 mr-2">
@@ -81,14 +89,14 @@ export function LoginForm({
                 fill="currentColor"
               />
             </svg>
-            Login with Google
+            Login com o Google
           </Button>
-          <FieldDescription className="text-center">
-            Don&apos;t have an account?{" "}
-            <Link to="/register" className="underline underline-offset-4">
-              Sign up
+          <p className="text-center text-xs text-[#F9FBDB]/60 mt-6">
+            Não tem uma conta?{" "}
+            <Link to="/register" className="text-[#F9FBDB] font-bold underline underline-offset-4">
+              Cadastre-se
             </Link>
-          </FieldDescription>
+          </p>
         </Field>
       </FieldGroup>
     </form>

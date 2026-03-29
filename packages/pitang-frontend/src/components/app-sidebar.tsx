@@ -1,7 +1,7 @@
 import * as React from "react";
+import { Link } from "@tanstack/react-router"; 
 
 import { NavProjects } from "@/components/nav-projects";
-import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
@@ -9,73 +9,81 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { FrameIcon, PieChartIcon, MapIcon, TerminalIcon, PackageIcon } from "lucide-react";
+import {
+  Anchor,
+  LayoutDashboard,
+  Package,
+  Users,
+  type LucideIcon
+} from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 
 const data = {
-  navMain: [],
-  navSecondary: [],
   projects: [
     {
       name: "Dashboard",
       url: "/dashboard",
-      icon: <PieChartIcon />,
+      icon: LayoutDashboard as LucideIcon,
     },
     {
-      name: "Products",
+      name: "Produtos",
       url: "/dashboard/products",
-      icon: <PackageIcon />,
+      icon: Package as LucideIcon,
     },
     {
-      name: "Users",
+      name: "Usuários",
       url: "/dashboard/users",
-      icon: <MapIcon />,
-    },
-    {
-      name: "Todos",
-      url: "/dashboard/todos",
-      icon: <FrameIcon />,
+      icon: Users as LucideIcon,
     },
   ],
 };
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { loggedUser, handleLogout } = useAuth();
+  const { state } = useSidebar();
 
   return (
-    <Sidebar variant="inset" {...props}>
-      <SidebarHeader>
+   
+    <Sidebar variant="floating" collapsible="icon" {...props}>
+      <SidebarHeader className="pt-8 px-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" render={<a href="#" />}>
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <TerminalIcon className="size-4" />
+            <Link to="/dashboard" className="flex items-center gap-3 group">
+              <div className="flex aspect-square size-10 items-center justify-center rounded-xl bg-[#F9FBDB] text-[#075F5F] shadow-lg shrink-0 transition-transform group-hover:scale-105">
+                <Anchor className="size-6" />
               </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
-                  {loggedUser?.company?.name}
-                </span>
-                <span className="truncate text-xs">
-                  {loggedUser?.company?.title}
-                </span>
-              </div>
-            </SidebarMenuButton>
+
+              {state === "expanded" && (
+                <div className="grid flex-1 text-left text-sm leading-tight animate-in fade-in duration-300">
+                  <span className="truncate font-black uppercase tracking-tighter text-[#F9FBDB] text-2xl leading-none">
+                    Cais
+                  </span>
+                  <span className="truncate text-[10px] font-bold uppercase tracking-widest text-[#F9FBDB]/60 mt-1">
+                    {loggedUser?.company?.title || "Terminal Principal"}
+                  </span>
+                </div>
+              )}
+            </Link>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+
+      <SidebarContent className="mt-6 px-2">
         <NavProjects projects={data.projects} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter>
+
+      <SidebarFooter className="pb-4 px-2">
         <NavUser
           handleLogout={handleLogout}
           user={{
             avatar: loggedUser?.image || "",
-            email: loggedUser?.email || "",
-            name: `${loggedUser?.firstName} ${loggedUser?.lastName}` || "",
+            email: loggedUser?.email || "emily@cais.com",
+            name: loggedUser?.firstName 
+              ? `${loggedUser.firstName} ${loggedUser.lastName}` 
+              : "Emily Johnson",
           }}
         />
       </SidebarFooter>

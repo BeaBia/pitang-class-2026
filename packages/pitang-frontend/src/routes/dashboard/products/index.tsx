@@ -43,6 +43,8 @@ function ProductsPage() {
   const [total, setTotal] = useState(0);
   const limit = 12;
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function loadProducts() {
@@ -93,7 +95,7 @@ function ProductsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-center">Loading products...</div>
+        <div className="text-center">Carregando produtos...</div>
       </div>
     );
   }
@@ -101,7 +103,7 @@ function ProductsPage() {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Products</h1>
+        <h1 className="text-2xl font-bold">Produtos</h1>
         <div className="flex gap-2">
           <Button
             variant={viewMode === "grid" ? "default" : "outline"}
@@ -156,8 +158,16 @@ function ProductsPage() {
                 </div>
               </CardContent>
               <CardFooter className="p-4 pt-0">
-                <Button variant="outline" className="w-full" size="sm">
-                  View Details
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  size="sm"
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Detalhes
                 </Button>
               </CardFooter>
             </Card>
@@ -237,6 +247,41 @@ function ProductsPage() {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
+     
+      {isModalOpen && selectedProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-[#F9FBDB] border-2 border-[#075F5F] rounded-[2rem] max-w-2xl w-full p-8 shadow-2xl relative">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-[#075F5F] font-black"
+            >
+              [ X ]
+            </button>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-xl p-4 flex items-center justify-center border border-[#075F5F]/10">
+                <img src={selectedProduct.thumbnail} alt={selectedProduct.title} className="max-h-48 object-contain" />
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <h2 className="text-2xl font-black text-[#075F5F] uppercase italic tracking-tighter">
+                  {selectedProduct.title}
+                </h2>
+                <p className="text-[10px] font-bold text-[#B94E27] uppercase tracking-widest">
+                  {selectedProduct.brand} | {selectedProduct.category}
+                </p>
+                <p className="text-xs text-[#075F5F]/80 leading-relaxed">
+                  {selectedProduct.description}
+                </p>
+                <div className="mt-auto pt-4 border-t border-[#075F5F]/10 flex justify-between items-center">
+                  <span className="text-3xl font-black text-[#075F5F]">${selectedProduct.price}</span>
+                  <span className="text-[10px] font-bold text-[#075F5F]/40 uppercase">Stock: {selectedProduct.stock}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

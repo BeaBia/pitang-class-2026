@@ -6,40 +6,53 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* Fundo da página e dos cards: Creme #F9FBDB */
+  --background: oklch(0.97 0.04 85.5);
+  --foreground: oklch(0.35 0.12 180); /* Teal Principal #075F5F */
+  
+  --card: oklch(0.97 0.04 85.5);
+  --card-foreground: oklch(0.35 0.12 180);
 
+  --popover: oklch(0.97 0.04 85.5);
+  --popover-foreground: oklch(0.35 0.12 180);
+
+  /* Cor Primária: Teal #075F5F */
+  --primary: oklch(0.35 0.12 180);
+  --primary-foreground: oklch(0.97 0.04 85.5);
+
+  /* COR SECUNDÁRIA AJUSTADA: Laranja do Cais #B94E27 */
+  --secondary: oklch(83.252% 0.07602 48.586); 
+  --secondary-foreground: oklch(0.97 0.04 85.5);
+
+  /* Cores de apoio mais neutras para não cansar o olho */
+  --muted: oklch(0.92 0.02 85.5);
+  --muted-foreground: oklch(0.35 0.12 180 / 0.7);
+
+  --accent: oklch(0.55 0.18 45 / 0.1); /* Destaque suave em laranja */
+  --accent-foreground: oklch(0.55 0.18 45);
+
+  --destructive: oklch(0.55 0.18 45); /* Laranja Cais */
+  --destructive-foreground: oklch(0.97 0.04 85.5);
+  
+  --border: oklch(0.35 0.12 180 / 0.15);
+  --input: oklch(0.35 0.12 180 / 0.15);
+  --ring: oklch(0.55 0.18 45); /* Ring agora é laranja para destacar foco */
+
+  --radius: 1.25rem; /* Aumentei o radius para combinar com os cards arredondados */
+
+  /* SIDEBAR (VERDE COM LETRA CREME) */
+  --sidebar: oklch(0.35 0.12 180); 
+  --sidebar-foreground: oklch(0.97 0.04 85.5); 
+  
+  --sidebar-primary: oklch(0.55 0.18 45); /* Ativo na sidebar em Laranja */
+  --sidebar-primary-foreground: oklch(0.97 0.04 85.5);
+  
+  --sidebar-accent: oklch(1 1 1 / 0.1);
+  --sidebar-accent-foreground: oklch(0.97 0.04 85.5);
+  
+  --sidebar-border: oklch(1 1 1 / 0.1);
+  --sidebar-ring: oklch(0.55 0.18 45);
+}
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
